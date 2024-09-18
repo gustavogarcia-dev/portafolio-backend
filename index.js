@@ -20,10 +20,15 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Configura las rutas
+
 app.use('/api/projects', projects);
 app.use('/api/new-project', newProjectRoutes);
 app.use('/api/project-delete/', projectDeleteRoutes);
 
+app.get("/", (req,res)=>{
+
+    res.send("bienvenidos a la Api-projects")
+})
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
