@@ -1,17 +1,23 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import projects from './api/routes/projects.js';
 import newProjectRoutes from './api/routes/new-project.js';
 import projectDeleteRoutes from './api/routes/project-delete.js';
 import dotenv from 'dotenv';
 
 
+dotenv.config();
 
 const app = express();
-dotenv.config();
+
+
 // Middleware to parse JSON requests
 app.use(express.json());
-app.use(bodyParser.json());
+
+// Configuración específica para producción
+if (process.env.NODE_ENV === 'production') {
+    app.set('env', 'production');
+    // Agrega aquí otras configuraciones específicas para producción si es necesario
+}
 
 // Configura las rutas
 app.use('/api/projects', projects);
